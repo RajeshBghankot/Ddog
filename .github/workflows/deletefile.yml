@@ -1,0 +1,30 @@
+name: Delete a File
+
+on:
+  workflow_dispatch:  # Manual trigger from GitHub UI
+
+jobs:
+  delete-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Delete file
+        run: |
+          FILE="path/to/your/file.txt"
+          if [ -f "$FILE" ]; then
+            echo "Deleting $FILE"
+            rm "$FILE"
+          else
+            echo "$FILE not found."
+          fi
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Delete file via GitHub Action" || echo "Nothing to commit"
+          git push
