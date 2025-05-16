@@ -13,7 +13,7 @@ jobs:
 
       - name: Delete file
         run: |
-          FILE="path/to/your/file.txt"
+          FILE="/root/win/fi.img"
           if [ -f "$FILE" ]; then
             echo "Deleting $FILE"
             rm "$FILE"
